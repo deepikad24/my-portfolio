@@ -6,17 +6,16 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
-// Load Inter font for non-Apple devices
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-  title: "Toukoum Portfolio",
+  title: "Deepika Portfolio",
   description: "Interactive portfolio with an AI-powered Memoji that answers questions about me, my skills, and my experience",
   keywords: [
-    "Toukoum", 
+    "Deepika", 
     "Portfolio", 
     "Developer", 
     "AI", 
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "Toukoum",
+      name: "Deepika",
       url: "https://toukoum.fr",
     },
   ],
@@ -62,15 +61,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <link rel="icon" href="/favicon.svg" sizes="any" />
-      </head>
+    <html lang="en">
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

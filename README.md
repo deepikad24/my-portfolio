@@ -2,7 +2,7 @@
 
 ![image](assets/readme-photo.png)
  
-# World's first AI portfolio 🤖✨  
+# World's first DEEPU AI 🤖✨  
 
 **Static portfolios are dead.**  
 So I built [toukoum.fr](https://toukoum.fr).
