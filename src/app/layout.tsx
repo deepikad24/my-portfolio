@@ -32,7 +32,7 @@ export const metadata: Metadata = {
       url: "https://toukoum.fr",
     },
   ],
-  creator: "Toukoum",
+  creator: "Deepika",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -40,22 +40,6 @@ export const metadata: Metadata = {
     title: "Toukoum Portfolio",
     description: "Interactive portfolio with an AI-powered Memoji that answers questions about me",
     siteName: "Toukoum Portfolio",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Toukoum Portfolio",
-    description: "Interactive portfolio with an AI-powered Memoji that answers questions about me",
-    creator: "@toukoum",
-  },
-  icons: {
-    icon: [
-      {
-        url: "/favicon.svg",
-        sizes: "any",
-      }
-    ],
-    shortcut: "/favicon.svg?v=2",
-    apple: "/apple-touch-icon.svg?v=2",
   },
 };
 

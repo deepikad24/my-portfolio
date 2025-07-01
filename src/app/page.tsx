@@ -15,16 +15,13 @@ import {
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import GitHubButton from 'react-github-btn';
 
-/* ---------- quick-question data ---------- */
 const questions = {
   Me: 'Who are you? I want to know more about you.',
   Projects: 'What are your projects? What are you working on right now?',
   Skills: 'What are your skills? Give me a list of your soft and hard skills.',
   Fun: 'What’s the craziest thing you’ve ever done? What are your hobbies?',
-  Contact:
-    'How can I contact you?',
+  Contact: 'How can I contact you?',
 } as const;
 
 const questionConfig = [
@@ -35,7 +32,6 @@ const questionConfig = [
   { key: 'Contact', color: '#C19433', icon: UserRoundSearch },
 ] as const;
 
-/* ---------- component ---------- */
 export default function Home() {
   const [input, setInput] = useState('');
   const router = useRouter();
@@ -44,7 +40,6 @@ export default function Home() {
   const goToChat = (query: string) =>
     router.push(`/chat?query=${encodeURIComponent(query)}`);
 
-  /* hero animations (unchanged) */
   const topElementVariants = {
     hidden: { opacity: 0, y: -60 },
     visible: {
@@ -53,6 +48,7 @@ export default function Home() {
       transition: { type: 'ease', duration: 0.8 },
     },
   };
+
   const bottomElementVariants = {
     hidden: { opacity: 0, y: 80 },
     visible: {
@@ -63,13 +59,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Précharger les assets du chat en arrière-plan
     const img = new window.Image();
-    img.src = '/landing-memojis.png';
+    img.src = '/landing-memojis-1.png';
 
-    // Précharger les vidéos aussi
     const linkWebm = document.createElement('link');
-    linkWebm.rel = 'preload'; // Note: prefetch au lieu de preload
+    linkWebm.rel = 'preload';
     linkWebm.as = 'video';
     linkWebm.href = '/final_memojis.webm';
     document.head.appendChild(linkWebm);
@@ -83,35 +77,22 @@ export default function Home() {
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20">
-      {/* big blurred footer word */}
+      {/* Big blurred footer name with interactive gradient */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden">
         <div
-          className="hidden bg-gradient-to-b from-neutral-500/10 to-neutral-500/0 bg-clip-text text-[10rem] leading-none font-black text-transparent select-none sm:block lg:text-[16rem]"
+          className="hidden bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-[10rem] font-black leading-none text-transparent animate-gradient-x select-none sm:block lg:text-[16rem]"
           style={{ marginBottom: '-2.5rem' }}
         >
           Deepika
         </div>
       </div>
 
-      {/* GitHub button */}
-      <div className="absolute top-6 right-8 z-20">
-        <GitHubButton
-          href="https://github.com/toukoum/portfolio"
-          data-color-scheme="no-preference: light; light: light; dark: light_high_contrast;"
-          data-size="large"
-          data-show-count="true"
-          aria-label="Star toukoum/portfolio on GitHub"
-        >
-          Star
-        </GitHubButton>
-      </div>
-
+      {/* Custom contact button */}
       <div className="absolute top-6 left-6 z-20">
         <button
           onClick={() => goToChat('Are you looking for an internship?')}
           className="cursor-pointer relative flex items-center gap-2 rounded-full border bg-white/30 px-4 py-1.5 text-sm font-medium text-black shadow-md backdrop-blur-lg transition hover:bg-white/60 dark:border-white dark:text-white dark:hover:bg-neutral-800"
         >
-          {/* Green pulse dot */}
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
@@ -120,7 +101,7 @@ export default function Home() {
         </button>
       </div>
 
-      {/* header */}
+      {/* Header */}
       <motion.div
         className="z-1 mb-8 flex flex-col items-center text-center md:mb-12 mt-24 md:mt-4"
         variants={topElementVariants}
@@ -130,35 +111,33 @@ export default function Home() {
         <div className="z-100">
           <WelcomeModal />
         </div>
-
         <h2 className="text-secondary-foreground mt-1 text-xl font-semibold md:text-2xl">
           Hey, I'M DEEPIKA 👋
         </h2>
-        <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-blue-400 via-pink-500 to-purple-500 bg-clip-text text-transparent animate-gradient-x">
           DEEPU AI
         </h1>
       </motion.div>
 
-      {/* centre memoji */}
-      <div className="relative z-10 h-52 w-48 overflow-hidden sm:h-72 sm:w-72">
+      {/* Hero image */}
+      <div className="relative z-10 h-48 w-48 overflow-hidden sm:h-64 sm:w-64">
         <Image
           src="/landing-memojis.png"
           alt="Hero memoji"
-          width={2000}
-          height={2000}
+          width={1024}
+          height={1024}
           priority
-          className="translate-y-14 scale-[2] object-cover"
+          className="translate-y-2 scale-[1] object-cover"
         />
       </div>
 
-      {/* input + quick buttons */}
+      {/* Input + quick questions */}
       <motion.div
         variants={bottomElementVariants}
         initial="hidden"
         animate="visible"
         className="z-10 mt-4 flex w-full flex-col items-center justify-center md:px-0"
       >
-        {/* free-form question */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -186,23 +165,27 @@ export default function Home() {
           </div>
         </form>
 
-        {/* quick-question grid */}
         <div className="mt-4 grid w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 md:grid-cols-5">
           {questionConfig.map(({ key, color, icon: Icon }) => (
             <Button
               key={key}
               onClick={() => goToChat(questions[key])}
               variant="outline"
-              className="shadow-none border-border hover:bg-border/30 aspect-square w-full cursor-pointer rounded-2xl border bg-white/30 py-8 backdrop-blur-lg active:scale-95 md:p-10"
+              className="shadow-none border-border hover:bg-border/30 aspect-square w-full cursor-pointer rounded-2xl border bg-white/30 py-8 backdrop-blur-lg active:scale-95 md:p-10 transition-transform transform hover:scale-105 hover:shadow-xl"
             >
-              <div className="flex h-full flex-col items-center justify-center gap-1 text-gray-700">
+              <motion.div
+                whileHover={{ rotate: 8 }}
+                whileTap={{ rotate: -8 }}
+                className="flex h-full flex-col items-center justify-center gap-1 text-gray-700"
+              >
                 <Icon size={22} strokeWidth={2} color={color} />
                 <span className="text-xs font-medium sm:text-sm">{key}</span>
-              </div>
+              </motion.div>
             </Button>
           ))}
         </div>
       </motion.div>
+
       <FluidCursor />
     </div>
   );
