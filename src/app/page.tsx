@@ -11,10 +11,13 @@ import {
   Layers,
   PartyPopper,
   UserRoundSearch,
+  Moon,
+  Sun
 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { useTheme } from 'next-themes';
 
 const questions = {
   Me: 'Who are you? I want to know more about you.',
@@ -36,6 +39,7 @@ export default function Home() {
   const [input, setInput] = useState('');
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { theme, setTheme } = useTheme();
 
   const goToChat = (query: string) =>
     router.push(`/chat?query=${encodeURIComponent(query)}`);
@@ -75,16 +79,31 @@ export default function Home() {
     document.head.appendChild(linkMp4);
   }, []);
 
+  const bgClass = theme === 'dark' ? 'bg-[#0a0f3d]' : 'bg-white';
+  const cursorVariant = 'rainbow';
+  const gradientText = 'bg-gradient-to-r from-blue-400 via-pink-400 to-purple-500';
+  const textColor = theme === 'dark' ? 'text-white/70' : 'text-neutral-800';
+
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20 bg-[#0a0f3d]">
-      {/* Big blurred footer name with interactive gradient */}
+    <div className={`relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20 transition-colors duration-500 ${bgClass}`}>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden">
-        <div className="hidden sm:block lg:text-[16rem] text-[10rem] font-black leading-none text-white/10 bg-gradient-to-br from-white/30 to-transparent bg-clip-text animate-pulse backdrop-blur-md select-none">
+        <div className={`hidden sm:block lg:text-[16rem] text-[10rem] font-black leading-none select-none animate-pulse
+          ${theme === 'dark' ? 'text-white/20' : 'text-black/10'}
+          px-6 py-2 backdrop-blur-3xl`}>
           Deepika
         </div>
       </div>
 
-      {/* Custom contact button */}
+      <div className="absolute top-6 right-6 z-20">
+        <button
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          className="cursor-pointer flex items-center gap-2 rounded-full border bg-white/30 px-4 py-1.5 text-sm font-medium text-black shadow-md backdrop-blur-lg transition hover:bg-white/60 dark:border-white dark:text-white dark:hover:bg-neutral-800"
+        >
+          {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+          {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+        </button>
+      </div>
+
       <div className="absolute top-6 left-6 z-20">
         <button
           onClick={() => goToChat('Are you looking for an internship?')}
@@ -98,7 +117,6 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Header */}
       <motion.div
         className="z-1 mb-4 flex flex-col items-center text-center md:mb-8 mt-24 md:mt-4"
         variants={topElementVariants}
@@ -111,16 +129,16 @@ export default function Home() {
         <h2 className="text-secondary-foreground mt-1 text-xl font-semibold md:text-2xl">
           Hey, I'M DEEPIKA 👋
         </h2>
-        <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl bg-[linear-gradient(110deg,#3b82f6,#ec4899,#8b5cf6)] bg-[length:300%_300%] bg-clip-text text-transparent animate-[lightSweep_4s_infinite_linear]">
+        <h1 className={`text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl ${gradientText} bg-clip-text text-transparent animate-[lightSweep_4s_infinite_linear]`}>
           DEEPU AI
         </h1>
-        <p className="mt-2 text-center text-lg font-semibold tracking-wide text-white/70 flex flex-wrap justify-center gap-2">
+        <p className={`mt-2 text-center text-lg font-semibold tracking-wide flex flex-wrap justify-center gap-2 ${textColor}`}>
           {["Deep", "Engaging", "Expressive", "Playful", "Unique", "AI"].map((word, i) => (
             <motion.span
               key={i}
               whileHover={{ scale: 1.2, rotate: 3 }}
               transition={{ type: 'spring', stiffness: 300 }}
-              className="bg-gradient-to-r from-blue-400 via-pink-400 to-purple-500 bg-clip-text text-transparent"
+              className={`${gradientText} bg-clip-text text-transparent`}
             >
               {word}
             </motion.span>
@@ -128,7 +146,6 @@ export default function Home() {
         </p>
       </motion.div>
 
-      {/* Hero image */}
       <div className="relative z-10 h-48 w-48 overflow-hidden sm:h-64 sm:w-64">
         <Image
           src="/landing-memojis.png"
@@ -140,7 +157,6 @@ export default function Home() {
         />
       </div>
 
-      {/* Input + quick questions */}
       <motion.div
         variants={bottomElementVariants}
         initial="hidden"
@@ -185,7 +201,7 @@ export default function Home() {
               <motion.div
                 whileHover={{ rotate: 8 }}
                 whileTap={{ rotate: -8 }}
-                className="flex h-full flex-col items-center justify-center gap-1 text-gray-700"
+                className={`flex h-full flex-col items-center justify-center gap-1 ${textColor}`}
               >
                 <Icon size={22} strokeWidth={2} color={color} />
                 <span className="text-xs font-medium sm:text-sm">{key}</span>
@@ -195,7 +211,7 @@ export default function Home() {
         </div>
       </motion.div>
 
-      <FluidCursor />
+      <FluidCursor variant={cursorVariant} />
     </div>
   );
 }

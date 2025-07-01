@@ -2,7 +2,7 @@ import { Analytics } from "@vercel/analytics/react"
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "next-themes"; // ✅ updated import
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -49,18 +49,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           inter.variable,
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-        >
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true}>
           <main className="flex min-h-screen flex-col">
             {children}
           </main>
