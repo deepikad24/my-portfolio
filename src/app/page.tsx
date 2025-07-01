@@ -76,12 +76,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20">
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20 bg-[#0a0f3d]">
       {/* Big blurred footer name with interactive gradient */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden">
         <div className="hidden sm:block lg:text-[16rem] text-[10rem] font-black leading-none text-white/10 bg-gradient-to-br from-white/30 to-transparent bg-clip-text animate-pulse backdrop-blur-md select-none">
-  Deepika
-</div>
+          Deepika
+        </div>
       </div>
 
       {/* Custom contact button */}
@@ -111,13 +111,21 @@ export default function Home() {
         <h2 className="text-secondary-foreground mt-1 text-xl font-semibold md:text-2xl">
           Hey, I'M DEEPIKA 👋
         </h2>
-        <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-blue-400 via-pink-500 to-purple-500 bg-clip-text text-transparent animate-gradient-x">
-  DEEPU AI
-</h1>
-<p className="mt-2 text-center text-lg font-medium bg-gradient-to-r from-blue-400 via-pink-400 to-purple-500 bg-clip-text text-transparent animate-gradient-x max-w-xl tracking-wide">
-  Deep · Engaging · Expressive · Playful · Unique AI
-</p>
-        
+        <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl bg-[linear-gradient(110deg,#3b82f6,#ec4899,#8b5cf6)] bg-[length:300%_300%] bg-clip-text text-transparent animate-[lightSweep_4s_infinite_linear]">
+          DEEPU AI
+        </h1>
+        <p className="mt-2 text-center text-lg font-semibold tracking-wide text-white/70 flex flex-wrap justify-center gap-2">
+          {["Deep", "Engaging", "Expressive", "Playful", "Unique", "AI"].map((word, i) => (
+            <motion.span
+              key={i}
+              whileHover={{ scale: 1.2, rotate: 3 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              className="bg-gradient-to-r from-blue-400 via-pink-400 to-purple-500 bg-clip-text text-transparent"
+            >
+              {word}
+            </motion.span>
+          ))}
+        </p>
       </motion.div>
 
       {/* Hero image */}
