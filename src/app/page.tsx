@@ -60,7 +60,7 @@ export default function Home() {
 
   useEffect(() => {
     const img = new window.Image();
-    img.src = '/landing-memojis-1.png';
+    img.src = '/landing-memojis.png';
 
     const linkWebm = document.createElement('link');
     linkWebm.rel = 'preload';
@@ -79,12 +79,9 @@ export default function Home() {
     <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20">
       {/* Big blurred footer name with interactive gradient */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden">
-        <div
-          className="hidden bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-[10rem] font-black leading-none text-transparent animate-gradient-x select-none sm:block lg:text-[16rem]"
-          style={{ marginBottom: '-2.5rem' }}
-        >
-          Deepika
-        </div>
+        <div className="hidden sm:block lg:text-[16rem] text-[10rem] font-black leading-none text-white/10 bg-gradient-to-br from-white/30 to-transparent bg-clip-text animate-pulse backdrop-blur-md select-none">
+  Deepika
+</div>
       </div>
 
       {/* Custom contact button */}
@@ -103,7 +100,7 @@ export default function Home() {
 
       {/* Header */}
       <motion.div
-        className="z-1 mb-8 flex flex-col items-center text-center md:mb-12 mt-24 md:mt-4"
+        className="z-1 mb-4 flex flex-col items-center text-center md:mb-8 mt-24 md:mt-4"
         variants={topElementVariants}
         initial="hidden"
         animate="visible"
@@ -115,8 +112,12 @@ export default function Home() {
           Hey, I'M DEEPIKA 👋
         </h2>
         <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-blue-400 via-pink-500 to-purple-500 bg-clip-text text-transparent animate-gradient-x">
-          DEEPU AI
-        </h1>
+  DEEPU AI
+</h1>
+<p className="mt-2 text-center text-lg font-medium bg-gradient-to-r from-blue-400 via-pink-400 to-purple-500 bg-clip-text text-transparent animate-gradient-x max-w-xl tracking-wide">
+  Deep · Engaging · Expressive · Playful · Unique AI
+</p>
+        
       </motion.div>
 
       {/* Hero image */}
