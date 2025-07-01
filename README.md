@@ -1,5 +1,3 @@
-
-
 ![image](assets/readme-photo.png)
  
 # World's first DEEPU AI 🤖✨  
